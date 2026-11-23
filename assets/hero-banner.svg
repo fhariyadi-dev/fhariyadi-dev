@@ -126,15 +126,12 @@
     <!-- Centered Tagline -->
     <text x="450" y="152" text-anchor="middle" class="sans" font-size="15.5" font-weight="500" fill="#CBD5E1">Web Engineering  •  TypeScript &amp; React  •  AI Agent Workflows</text>
 
-    <!-- Three Centered Handle Chips -->
-    <rect x="255" y="174" width="112" height="26" rx="8" fill="#0A1630" stroke="#00E5FF" stroke-opacity="0.5" stroke-width="1.1"/>
-    <text x="311" y="191" text-anchor="middle" class="mono" font-size="11.5" font-weight="600" fill="#67E8F9">@fthrxyzz</text>
+    <!-- Two Centered Handle Chips -->
+    <rect x="294" y="174" width="148" height="26" rx="8" fill="#0A1630" stroke="#3B82F6" stroke-opacity="0.55" stroke-width="1.1"/>
+    <text x="368" y="191" text-anchor="middle" class="mono" font-size="11.5" font-weight="600" fill="#93C5FD">fhariyadi-dev</text>
 
-    <rect x="379" y="174" width="142" height="26" rx="8" fill="#0A1630" stroke="#3B82F6" stroke-opacity="0.55" stroke-width="1.1"/>
-    <text x="450" y="191" text-anchor="middle" class="mono" font-size="11.5" font-weight="600" fill="#93C5FD">fhariyadi-dev</text>
-
-    <rect x="533" y="174" width="112" height="26" rx="8" fill="#0A1630" stroke="#8B5CF6" stroke-opacity="0.55" stroke-width="1.1"/>
-    <text x="589" y="191" text-anchor="middle" class="mono" font-size="11.5" font-weight="600" fill="#C4B5FD">@askyuna.ai</text>
+    <rect x="458" y="174" width="148" height="26" rx="8" fill="#0A1630" stroke="#8B5CF6" stroke-opacity="0.55" stroke-width="1.1"/>
+    <text x="532" y="191" text-anchor="middle" class="mono" font-size="11.5" font-weight="600" fill="#C4B5FD">@askyuna.ai</text>
 
     <!-- Subtle Location & Email Caption -->
     <text x="450" y="236" text-anchor="middle" class="mono" font-size="11" fill="#64748B">LAMPUNG, INDONESIA  ·  HALLO@FATHURRAHMANH.ME</text>

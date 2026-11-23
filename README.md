@@ -2,38 +2,40 @@
   <img src="./assets/hero-banner.svg" alt="Fathurrahman Hariyadi — Cosmic Sapphire Developer Profile" width="100%" />
 </div>
 
-<table>
-  <tr>
-    <td width="25%" align="center" valign="middle">
-      <a href="https://portofthrxyz.vercel.app">
-        <img src="./assets/icon-portfolio.svg" alt="Portfolio" width="46" height="46" /><br />
-        <strong>PORTFOLIO &nearr;</strong>
-      </a><br />
-      <sub><code>portofthrxyz.vercel.app</code></sub>
-    </td>
-    <td width="25%" align="center" valign="middle">
-      <a href="https://github.com/fhariyadi-dev/askyuna-starter-kit">
-        <img src="./assets/yuna-ai-logo.jpg" alt="Yuna AI Agent" width="46" height="46" /><br />
-        <strong>AI AGENT &nearr;</strong>
-      </a><br />
-      <sub><code>@askyuna.ai</code></sub>
-    </td>
-    <td width="25%" align="center" valign="middle">
-      <a href="https://instagram.com/fthr.xjz">
-        <img src="./assets/icon-instagram.svg" alt="Instagram" width="46" height="46" /><br />
-        <strong>INSTAGRAM &nearr;</strong>
-      </a><br />
-      <sub><code>@fthr.xjz</code></sub>
-    </td>
-    <td width="25%" align="center" valign="middle">
-      <a href="mailto:hallo@fathurrahmanh.me">
-        <img src="./assets/icon-email.svg" alt="Email" width="46" height="46" /><br />
-        <strong>EMAIL &nearr;</strong>
-      </a><br />
-      <sub><code>hallo@fathurrahmanh.me</code></sub>
-    </td>
-  </tr>
-</table>
+<div align="center">
+  <table width="100%">
+    <tr>
+      <td width="25%" align="center" valign="middle">
+        <a href="https://portofthrxyz.vercel.app">
+          <img src="./assets/icon-portfolio.svg" alt="Portfolio" width="48" height="48" /><br />
+          <strong>PORTFOLIO</strong>
+        </a><br />
+        <sub><code>portofthrxyz.vercel.app</code></sub>
+      </td>
+      <td width="25%" align="center" valign="middle">
+        <a href="https://github.com/fhariyadi-dev/askyuna-starter-kit">
+          <img src="./assets/yuna-ai-logo.jpg" alt="Yuna AI Agent" width="48" height="48" /><br />
+          <strong>AI AGENT</strong>
+        </a><br />
+        <sub><code>@askyuna.ai</code></sub>
+      </td>
+      <td width="25%" align="center" valign="middle">
+        <a href="https://instagram.com/fthr.xjz">
+          <img src="./assets/icon-instagram.svg" alt="Instagram" width="48" height="48" /><br />
+          <strong>INSTAGRAM</strong>
+        </a><br />
+        <sub><code>@fthr.xjz</code></sub>
+      </td>
+      <td width="25%" align="center" valign="middle">
+        <a href="mailto:hallo@fathurrahmanh.me">
+          <img src="./assets/icon-email.svg" alt="Email" width="48" height="48" /><br />
+          <strong>EMAIL</strong>
+        </a><br />
+        <sub><code>hallo@fathurrahmanh.me</code></sub>
+      </td>
+    </tr>
+  </table>
+</div>
 
 <div align="center">
   <img src="./assets/divider.svg" alt="divider" width="100%" />
@@ -117,62 +119,52 @@ interests:
 
 ## `03` // Selected Works
 
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <h3><a href="https://github.com/fhariyadi-dev/portofthrxyz">portofthrxyz</a></h3>
-      <p>Personal developer portfolio built with smooth motion transitions, responsive layout, and modern component architecture.</p>
-      <p>
-        <code>TypeScript</code> <code>React 19</code> <code>Tailwind v4</code> <code>Vite</code>
-      </p>
-      <a href="https://portofthrxyz.vercel.app" target="_blank">Live Preview &rarr;</a>
-    </td>
-    <td width="50%" valign="top">
-      <h3><a href="https://github.com/fhariyadi-dev/askyuna-starter-kit">askyuna-starter-kit</a></h3>
-      <p>Starter kit and practical playbook for building and customizing personal AI coding agent workflows — Yuna AI by Fathurrahman.</p>
-      <p>
-        <code>AI Agent</code> <code>Workflows</code> <code>Prompt Design</code>
-      </p>
-      <a href="https://github.com/fhariyadi-dev/askyuna-starter-kit" target="_blank">Explore Guide &rarr;</a>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3><a href="https://github.com/fhariyadi-dev/WebsiteTONIMERP">WebsiteTONIMERP</a></h3>
-      <p>Next-generation web portal and interactive community hub built for The Old Norse Roleplay ecosystem.</p>
-      <p>
-        <code>JavaScript</code> <code>Web UI</code> <code>Vercel</code>
-      </p>
-      <a href="https://theoldnorsethenextgen.vercel.app" target="_blank">Live Preview &rarr;</a>
-    </td>
-    <td width="50%" valign="top">
-      <h3><a href="https://github.com/fhariyadi-dev/Sistem-Pembagian-Tagihan-Pengeluaran-Kost">Sistem Pembagian Tagihan Kost</a></h3>
-      <p>Dormitory shared-expense and bill-splitting CLI application engineered for fair and fast monthly expense calculations.</p>
-      <p>
-        <code>C++</code> <code>CLI System</code> <code>Algorithms</code>
-      </p>
-      <a href="https://github.com/fhariyadi-dev/Sistem-Pembagian-Tagihan-Pengeluaran-Kost" target="_blank">View Source &rarr;</a>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3><a href="https://github.com/fhariyadi-dev/Website-Penjadwalan-Mata-Kuliah">Website Penjadwalan Mata Kuliah</a></h3>
-      <p>Interactive course scheduling web application crafted with generative-AI assisted web development practices.</p>
-      <p>
-        <code>HTML5</code> <code>CSS3</code> <code>JavaScript</code> <code>Gen AI</code>
-      </p>
-      <a href="https://website-penjadwalan-mata-kuliah.vercel.app" target="_blank">Live Preview &rarr;</a>
-    </td>
-    <td width="50%" valign="top">
-      <h3><a href="https://github.com/fhariyadi-dev/tonvault.my.id">tonvault.my.id</a></h3>
-      <p>Lightweight digital vault and resource catalog web platform deployed seamlessly for community access.</p>
-      <p>
-        <code>JavaScript</code> <code>Frontend</code> <code>Vercel</code>
-      </p>
-      <a href="https://tonvault-my-id.vercel.app" target="_blank">Live Preview &rarr;</a>
-    </td>
-  </tr>
-</table>
+<div align="center">
+  <table width="100%">
+    <tr>
+      <td width="50%" align="center" valign="top">
+        <a href="https://github.com/fhariyadi-dev/portofthrxyz">
+          <img src="https://github-readme-stats.vercel.app/api/pin/?username=fhariyadi-dev&repo=portofthrxyz&bg_color=0A142E&border_color=1E3A5F&title_color=38BDF8&text_color=CBD5E1&icon_color=00E5FF" alt="portofthrxyz" width="100%" />
+        </a><br />
+        <sub><a href="https://portofthrxyz.vercel.app" target="_blank">🌐 Live Preview &rarr;</a></sub>
+      </td>
+      <td width="50%" align="center" valign="top">
+        <a href="https://github.com/fhariyadi-dev/askyuna-starter-kit">
+          <img src="https://github-readme-stats.vercel.app/api/pin/?username=fhariyadi-dev&repo=askyuna-starter-kit&bg_color=0A142E&border_color=1E3A5F&title_color=38BDF8&text_color=CBD5E1&icon_color=00E5FF" alt="askyuna-starter-kit" width="100%" />
+        </a><br />
+        <sub><a href="https://github.com/fhariyadi-dev/askyuna-starter-kit" target="_blank">📖 Explore Guide &rarr;</a></sub>
+      </td>
+    </tr>
+    <tr>
+      <td width="50%" align="center" valign="top">
+        <a href="https://github.com/fhariyadi-dev/WebsiteTONIMERP">
+          <img src="https://github-readme-stats.vercel.app/api/pin/?username=fhariyadi-dev&repo=WebsiteTONIMERP&bg_color=0A142E&border_color=1E3A5F&title_color=38BDF8&text_color=CBD5E1&icon_color=00E5FF" alt="WebsiteTONIMERP" width="100%" />
+        </a><br />
+        <sub><a href="https://theoldnorsethenextgen.vercel.app" target="_blank">🌐 Live Preview &rarr;</a></sub>
+      </td>
+      <td width="50%" align="center" valign="top">
+        <a href="https://github.com/fhariyadi-dev/Sistem-Pembagian-Tagihan-Pengeluaran-Kost">
+          <img src="https://github-readme-stats.vercel.app/api/pin/?username=fhariyadi-dev&repo=Sistem-Pembagian-Tagihan-Pengeluaran-Kost&bg_color=0A142E&border_color=1E3A5F&title_color=38BDF8&text_color=CBD5E1&icon_color=00E5FF" alt="Sistem-Pembagian-Tagihan-Pengeluaran-Kost" width="100%" />
+        </a><br />
+        <sub><a href="https://github.com/fhariyadi-dev/Sistem-Pembagian-Tagihan-Pengeluaran-Kost" target="_blank">💻 View Source &rarr;</a></sub>
+      </td>
+    </tr>
+    <tr>
+      <td width="50%" align="center" valign="top">
+        <a href="https://github.com/fhariyadi-dev/Website-Penjadwalan-Mata-Kuliah">
+          <img src="https://github-readme-stats.vercel.app/api/pin/?username=fhariyadi-dev&repo=Website-Penjadwalan-Mata-Kuliah&bg_color=0A142E&border_color=1E3A5F&title_color=38BDF8&text_color=CBD5E1&icon_color=00E5FF" alt="Website-Penjadwalan-Mata-Kuliah" width="100%" />
+        </a><br />
+        <sub><a href="https://website-penjadwalan-mata-kuliah.vercel.app" target="_blank">🌐 Live Preview &rarr;</a></sub>
+      </td>
+      <td width="50%" align="center" valign="top">
+        <a href="https://github.com/fhariyadi-dev/tonvault.my.id">
+          <img src="https://github-readme-stats.vercel.app/api/pin/?username=fhariyadi-dev&repo=tonvault.my.id&bg_color=0A142E&border_color=1E3A5F&title_color=38BDF8&text_color=CBD5E1&icon_color=00E5FF" alt="tonvault.my.id" width="100%" />
+        </a><br />
+        <sub><a href="https://tonvault-my-id.vercel.app" target="_blank">🌐 Live Preview &rarr;</a></sub>
+      </td>
+    </tr>
+  </table>
+</div>
 
 <div align="center">
   <img src="./assets/divider.svg" alt="divider" width="100%" />
