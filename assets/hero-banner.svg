@@ -1,147 +1,147 @@
-<svg width="900" height="276" viewBox="0 0 900 276" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="900" height="270" viewBox="0 0 900 270" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="archBg" x1="0" y1="0" x2="900" y2="276" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#070B12"/>
-      <stop offset="55%" stop-color="#0C1424"/>
-      <stop offset="100%" stop-color="#08131E"/>
+    <linearGradient id="cosmicBg" x1="0" y1="0" x2="900" y2="270" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#050915"/>
+      <stop offset="50%" stop-color="#0A142E"/>
+      <stop offset="100%" stop-color="#060D20"/>
     </linearGradient>
 
-    <linearGradient id="leftSpine" x1="0" y1="0" x2="0" y2="276" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#F59E0B"/>
-      <stop offset="50%" stop-color="#10B981"/>
-      <stop offset="100%" stop-color="#06B6D4"/>
-    </linearGradient>
-
-    <linearGradient id="surnameGrad" x1="44" y1="145" x2="480" y2="195" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#FBBF24"/>
-      <stop offset="50%" stop-color="#34D399"/>
-      <stop offset="100%" stop-color="#38BDF8"/>
-    </linearGradient>
-
-    <radialGradient id="orbitAmbient" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(722 158) scale(135 120)">
-      <stop offset="0%" stop-color="#10B981" stop-opacity="0.22"/>
-      <stop offset="55%" stop-color="#06B6D4" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+    <radialGradient id="cyanNebula" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(450 96) scale(360 140)">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.18"/>
+      <stop offset="55%" stop-color="#2563EB" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#2563EB" stop-opacity="0"/>
     </radialGradient>
 
-    <radialGradient id="amberAmbient" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(90 70) scale(220 130)">
-      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.11"/>
-      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+    <radialGradient id="violetGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(150 220) scale(240 120)">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
     </radialGradient>
 
-    <pattern id="crosshairGrid" width="44" height="44" patternUnits="userSpaceOnUse">
-      <path d="M 22 19 L 22 25 M 19 22 L 25 22" stroke="#1E293B" stroke-width="1" opacity="0.75"/>
+    <radialGradient id="blueGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(760 220) scale(240 120)">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="nameGrad" x1="180" y1="90" x2="720" y2="132" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="48%" stop-color="#E0F2FE"/>
+      <stop offset="82%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#00E5FF"/>
+    </linearGradient>
+
+    <linearGradient id="horizonAccent" x1="0" y1="0" x2="900" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="50%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+
+    <pattern id="starDots" width="36" height="36" patternUnits="userSpaceOnUse">
+      <circle cx="18" cy="18" r="0.9" fill="#38BDF8" opacity="0.24"/>
     </pattern>
 
-    <clipPath id="heroClip">
-      <rect x="1" y="1" width="898" height="274" rx="16"/>
+    <clipPath id="cosmicClip">
+      <rect x="1" y="1" width="898" height="268" rx="18"/>
     </clipPath>
   </defs>
 
   <style>
     .mono { font-family: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', Consolas, monospace; }
     .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-
-    @keyframes spinCW {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.95; transform: scale(1); }
+      50% { opacity: 0.28; transform: scale(0.84); }
     }
-    @keyframes spinCCW {
-      from { transform: rotate(360deg); }
-      to { transform: rotate(0deg); }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
     }
-    @keyframes coreBreath {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.55; }
-    }
-
-    .ring-cw { transform-box: fill-box; transform-origin: center; animation: spinCW 28s linear infinite; }
-    .ring-ccw { transform-box: fill-box; transform-origin: center; animation: spinCCW 18s linear infinite; }
-    .core-pulse { animation: coreBreath 2.6s ease-in-out infinite; }
+    .spark-1 { transform-box: fill-box; transform-origin: center; animation: twinkle 2.8s ease-in-out infinite; }
+    .spark-2 { transform-box: fill-box; transform-origin: center; animation: twinkle 3.6s ease-in-out 0.9s infinite; }
+    .spark-3 { transform-box: fill-box; transform-origin: center; animation: twinkle 2.4s ease-in-out 1.5s infinite; }
+    .float-badge { animation: floatSlow 4.5s ease-in-out infinite; }
   </style>
 
-  <g clip-path="url(#heroClip)">
-    <!-- Architectural Canvas -->
-    <rect width="900" height="276" fill="url(#archBg)"/>
-    <rect width="900" height="276" fill="url(#crosshairGrid)"/>
-    <rect width="900" height="276" fill="url(#amberAmbient)"/>
-    <rect width="900" height="276" fill="url(#orbitAmbient)"/>
+  <g clip-path="url(#cosmicClip)">
+    <!-- Deep Space Base -->
+    <rect width="900" height="270" fill="url(#cosmicBg)"/>
+    <rect width="900" height="270" fill="url(#starDots)"/>
+    <rect width="900" height="270" fill="url(#cyanNebula)"/>
+    <rect width="900" height="270" fill="url(#violetGlow)"/>
+    <rect width="900" height="270" fill="url(#blueGlow)"/>
 
-    <!-- Subtle Diagonal Blueprint Lines -->
-    <line x1="540" y1="0" x2="680" y2="276" stroke="#1E293B" stroke-width="1" stroke-dasharray="4 6" opacity="0.7"/>
-    <line x1="600" y1="0" x2="740" y2="276" stroke="#1E293B" stroke-width="0.8" opacity="0.45"/>
-
-    <!-- Left Architectural Spine -->
-    <rect x="0" y="0" width="6" height="276" fill="url(#leftSpine)"/>
-
-    <!-- Editorial Micro Header (No Window Chrome!) -->
-    <text x="44" y="34" class="mono" font-size="10.5" font-weight="700" fill="#64748B" letter-spacing="1.6">00 // ARCHITECTURAL PROFILE</text>
-    <text x="862" y="34" text-anchor="end" class="mono" font-size="10.5" fill="#94A3B8" letter-spacing="0.8">5.3971° S · 105.2668° E — LAMPUNG, ID</text>
-    <line x1="44" y1="48" x2="862" y2="48" stroke="#1E293B" stroke-width="1" stroke-dasharray="3 5"/>
-
-    <!-- Eyebrow Accent -->
-    <rect x="44" y="75" width="26" height="3" rx="1.5" fill="#F59E0B"/>
-    <text x="80" y="80" class="mono" font-size="11.5" font-weight="700" fill="#94A3B8" letter-spacing="1.4">COMPUTER SCIENCE · UNIVERSITAS LAMPUNG</text>
-
-    <!-- Monumental 2-Line Stacked Display Name -->
-    <text x="42" y="135" class="sans" font-size="52" font-weight="900" fill="#F8FAFC" letter-spacing="2.5">FATHUR</text>
-    <text x="42" y="187" class="sans" font-size="52" font-weight="900" fill="url(#surnameGrad)" letter-spacing="2.5">HARIYADI</text>
-
-    <!-- Focus Line -->
-    <text x="44" y="216" class="sans" font-size="14" font-weight="500" fill="#CBD5E1">Web Engineering  ·  TypeScript &amp; React  ·  AI Agent Builder (@askyuna.ai)</text>
-
-    <!-- Bottom Minimalist Spec Strip -->
-    <line x1="44" y1="234" x2="548" y2="234" stroke="#1E293B" stroke-width="1"/>
-    <text x="44" y="255" class="mono" font-size="11" fill="#64748B">ALIAS</text>
-    <text x="88" y="255" class="mono" font-size="11" font-weight="700" fill="#FBBF24">fthrxyzz</text>
-
-    <text x="166" y="255" class="mono" font-size="11" fill="#334155">|</text>
-    <text x="184" y="255" class="mono" font-size="11" fill="#64748B">PREV</text>
-    <text x="220" y="255" class="mono" font-size="11" fill="#E2E8F0">Informatics UAD</text>
-
-    <text x="342" y="255" class="mono" font-size="11" fill="#334155">|</text>
-    <circle cx="364" cy="251" r="3.5" fill="#10B981" class="core-pulse"/>
-    <text x="376" y="255" class="mono" font-size="11" font-weight="700" fill="#34D399">OPEN TO COLLAB</text>
-
-    <!-- RIGHT SIDE: ANIMATED GEOMETRIC CYBER-ORBIT EMBLEM -->
-    <g>
-      <!-- Static Reference Axes -->
-      <line x1="622" y1="158" x2="822" y2="158" stroke="#1E293B" stroke-width="0.9" stroke-dasharray="2 4"/>
-      <line x1="722" y1="68" x2="722" y2="248" stroke="#1E293B" stroke-width="0.9" stroke-dasharray="2 4"/>
-
-      <!-- Outer Rotating Calibration Ring -->
-      <g class="ring-cw">
-        <circle cx="722" cy="158" r="78" fill="none" stroke="#334155" stroke-width="1.2" stroke-dasharray="4 7"/>
-        <circle cx="722" cy="80" r="3.5" fill="#F59E0B"/>
-        <circle cx="722" cy="236" r="3" fill="#38BDF8"/>
-      </g>
-
-      <!-- Middle Counter-Rotating Segmented Neon Ring -->
-      <g class="ring-ccw">
-        <circle cx="722" cy="158" r="56" fill="none" stroke="#10B981" stroke-width="2" stroke-dasharray="58 34 32 45" stroke-linecap="round"/>
-        <circle cx="722" cy="158" r="46" fill="none" stroke="#38BDF8" stroke-opacity="0.55" stroke-width="1.2" stroke-dasharray="22 24"/>
-      </g>
-
-      <!-- Hexagonal Core Emblem -->
-      <polygon points="722,126 750,142 750,174 722,190 694,174 694,142" fill="#0B1221" stroke="#34D399" stroke-width="1.6"/>
-      <polygon points="722,134 743,146 743,170 722,182 701,170 701,146" fill="#10B981" fill-opacity="0.1" stroke="#38BDF8" stroke-opacity="0.45" stroke-width="1"/>
-      <text x="722" y="164" text-anchor="middle" class="mono core-pulse" font-size="16" font-weight="800" fill="#F8FAFC">&lt;/&gt;</text>
-
-      <!-- Clean Blueprint Callout Nodes -->
-      <line x1="777" y1="106" x2="804" y2="86" stroke="#38BDF8" stroke-width="1" opacity="0.7"/>
-      <circle cx="777" cy="106" r="2.5" fill="#38BDF8"/>
-      <text x="809" y="89" class="mono" font-size="10" font-weight="700" fill="#7DD3FC">WEB.UI</text>
-
-      <line x1="786" y1="196" x2="810" y2="214" stroke="#10B981" stroke-width="1" opacity="0.7"/>
-      <circle cx="786" cy="196" r="2.5" fill="#10B981"/>
-      <text x="815" y="218" class="mono" font-size="10" font-weight="700" fill="#6EE7B7">AI.BOT</text>
-
-      <line x1="658" y1="196" x2="632" y2="214" stroke="#F59E0B" stroke-width="1" opacity="0.7"/>
-      <circle cx="658" cy="196" r="2.5" fill="#F59E0B"/>
-      <text x="627" y="218" text-anchor="end" class="mono" font-size="10" font-weight="700" fill="#FCD34D">SYS.C++</text>
+    <!-- Perspective Cyber-Horizon Grid at Bottom -->
+    <g opacity="0.22" stroke="#38BDF8" stroke-width="0.9">
+      <line x1="0" y1="216" x2="900" y2="216"/>
+      <line x1="0" y1="230" x2="900" y2="230"/>
+      <line x1="0" y1="248" x2="900" y2="248"/>
+      <line x1="450" y1="216" x2="450" y2="270"/>
+      <line x1="360" y1="216" x2="290" y2="270"/>
+      <line x1="540" y1="216" x2="610" y2="270"/>
+      <line x1="270" y1="216" x2="120" y2="270"/>
+      <line x1="630" y1="216" x2="780" y2="270"/>
+      <line x1="180" y1="216" x2="-40" y2="270"/>
+      <line x1="720" y1="216" x2="940" y2="270"/>
     </g>
+
+    <!-- Decorative Pixel Sparkles (Matching Yuna AI Aesthetic) -->
+    <g class="spark-1">
+      <rect x="92" y="70" width="4" height="14" rx="1" fill="#00E5FF"/>
+      <rect x="87" y="75" width="14" height="4" rx="1" fill="#00E5FF"/>
+    </g>
+    <g class="spark-2">
+      <rect x="138" y="138" width="3" height="11" rx="1" fill="#60A5FA"/>
+      <rect x="134" y="142" width="11" height="3" rx="1" fill="#60A5FA"/>
+    </g>
+    <g class="spark-3">
+      <rect x="78" y="182" width="3" height="9" rx="1" fill="#8B5CF6"/>
+      <rect x="75" y="185" width="9" height="3" rx="1" fill="#8B5CF6"/>
+    </g>
+    <g class="spark-2">
+      <rect x="798" y="68" width="4" height="14" rx="1" fill="#00E5FF"/>
+      <rect x="793" y="73" width="14" height="4" rx="1" fill="#00E5FF"/>
+    </g>
+    <g class="spark-1">
+      <rect x="752" y="146" width="3" height="11" rx="1" fill="#60A5FA"/>
+      <rect x="748" y="150" width="11" height="3" rx="1" fill="#60A5FA"/>
+    </g>
+    <g class="spark-3">
+      <rect x="822" y="178" width="3" height="9" rx="1" fill="#8B5CF6"/>
+      <rect x="819" y="181" width="9" height="3" rx="1" fill="#8B5CF6"/>
+    </g>
+
+    <!-- Subtle Orbital Arcs Framing Center -->
+    <circle cx="450" cy="135" r="295" fill="none" stroke="#1E3A5F" stroke-width="1" stroke-dasharray="5 9" opacity="0.5"/>
+    <circle cx="450" cy="135" r="355" fill="none" stroke="#1E293B" stroke-width="0.9" opacity="0.45"/>
+
+    <!-- Top Centered Role Pill -->
+    <g class="float-badge">
+      <rect x="302" y="34" width="296" height="26" rx="13" fill="#0D1B38" fill-opacity="0.9" stroke="#2563EB" stroke-opacity="0.65" stroke-width="1.2"/>
+      <circle cx="322" cy="47" r="3.8" fill="#00E5FF"/>
+      <text x="458" y="51" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#7DD3FC" letter-spacing="1.2">SOFTWARE &amp; WEB DEVELOPER</text>
+    </g>
+
+    <!-- Main Centered Display Name -->
+    <text x="450" y="118" text-anchor="middle" class="sans" font-size="46" font-weight="800" fill="url(#nameGrad)" letter-spacing="-0.6">Fathurrahman Hariyadi</text>
+
+    <!-- Centered Tagline -->
+    <text x="450" y="152" text-anchor="middle" class="sans" font-size="15.5" font-weight="500" fill="#CBD5E1">Web Engineering  •  TypeScript &amp; React  •  AI Agent Workflows</text>
+
+    <!-- Three Centered Handle Chips -->
+    <rect x="255" y="174" width="112" height="26" rx="8" fill="#0A1630" stroke="#00E5FF" stroke-opacity="0.5" stroke-width="1.1"/>
+    <text x="311" y="191" text-anchor="middle" class="mono" font-size="11.5" font-weight="600" fill="#67E8F9">@fthrxyzz</text>
+
+    <rect x="379" y="174" width="142" height="26" rx="8" fill="#0A1630" stroke="#3B82F6" stroke-opacity="0.55" stroke-width="1.1"/>
+    <text x="450" y="191" text-anchor="middle" class="mono" font-size="11.5" font-weight="600" fill="#93C5FD">fhariyadi-dev</text>
+
+    <rect x="533" y="174" width="112" height="26" rx="8" fill="#0A1630" stroke="#8B5CF6" stroke-opacity="0.55" stroke-width="1.1"/>
+    <text x="589" y="191" text-anchor="middle" class="mono" font-size="11.5" font-weight="600" fill="#C4B5FD">@askyuna.ai</text>
+
+    <!-- Subtle Location & Email Caption -->
+    <text x="450" y="236" text-anchor="middle" class="mono" font-size="11" fill="#64748B">LAMPUNG, INDONESIA  ·  HALLO@FATHURRAHMANH.ME</text>
+
+    <!-- Bottom Glowing Horizon Bar -->
+    <rect x="0" y="266" width="900" height="4" fill="url(#horizonAccent)"/>
   </g>
 
-  <!-- Crisp Outer Frame -->
-  <rect x="1" y="1" width="898" height="274" rx="16" stroke="#1E293B" stroke-width="1.4"/>
+  <rect x="1" y="1" width="898" height="268" rx="18" stroke="#1E3A5F" stroke-width="1.4"/>
 </svg>

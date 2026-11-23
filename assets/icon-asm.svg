@@ -1,0 +1,19 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="asmBg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E2538"/>
+      <stop offset="100%" stop-color="#141928"/>
+    </linearGradient>
+    <linearGradient id="asmStroke" x1="12" y1="12" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#asmBg)"/>
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="13.25" stroke="#334155" stroke-opacity="0.6" stroke-width="1.5"/>
+  <!-- CPU Pins -->
+  <path d="M22 10V16M32 10V16M42 10V16M22 48V54M32 48V54M42 48V54M10 22H16M10 32H16M10 42H16M48 22H54M48 32H54M48 42H54" stroke="#38BDF8" stroke-width="2.4" stroke-linecap="round"/>
+  <!-- Chip Body -->
+  <rect x="16" y="16" width="32" height="32" rx="6" fill="#0B1221" stroke="url(#asmStroke)" stroke-width="2.2"/>
+  <text x="32" y="36" text-anchor="middle" font-family="Consolas, 'SFMono-Regular', monospace" font-size="11.5" font-weight="800" fill="#E0F2FE">ASM</text>
+</svg>

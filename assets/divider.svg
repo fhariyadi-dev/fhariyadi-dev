@@ -1,19 +1,19 @@
 <svg width="900" height="20" viewBox="0 0 900 20" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="lineLeft" x1="0" y1="10" x2="425" y2="10" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#0F172A" stop-opacity="0"/>
-      <stop offset="70%" stop-color="#F59E0B" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#10B981" stop-opacity="0.9"/>
+      <stop offset="0%" stop-color="#0A142E" stop-opacity="0"/>
+      <stop offset="70%" stop-color="#2563EB" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#00E5FF" stop-opacity="0.95"/>
     </linearGradient>
     <linearGradient id="lineRight" x1="475" y1="10" x2="900" y2="10" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#10B981" stop-opacity="0.9"/>
-      <stop offset="30%" stop-color="#06B6D4" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#0F172A" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.95"/>
+      <stop offset="30%" stop-color="#8B5CF6" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0A142E" stop-opacity="0"/>
     </linearGradient>
   </defs>
   <line x1="20" y1="10" x2="425" y2="10" stroke="url(#lineLeft)" stroke-width="1.5"/>
   <line x1="475" y1="10" x2="880" y2="10" stroke="url(#lineRight)" stroke-width="1.5"/>
-  <polygon points="450,3 457,10 450,17 443,10" fill="#F59E0B" fill-opacity="0.22" stroke="#FBBF24" stroke-width="1.2"/>
-  <circle cx="433" cy="10" r="2" fill="#10B981"/>
-  <circle cx="467" cy="10" r="2" fill="#38BDF8"/>
+  <polygon points="450,3 457,10 450,17 443,10" fill="#00E5FF" fill-opacity="0.22" stroke="#38BDF8" stroke-width="1.2"/>
+  <circle cx="433" cy="10" r="2" fill="#3B82F6"/>
+  <circle cx="467" cy="10" r="2" fill="#8B5CF6"/>
 </svg>

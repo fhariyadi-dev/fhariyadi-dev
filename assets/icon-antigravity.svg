@@ -1,0 +1,24 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="agBg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E2538"/>
+      <stop offset="100%" stop-color="#141928"/>
+    </linearGradient>
+    <linearGradient id="agGrad" x1="14" y1="50" x2="50" y2="14" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4285F4"/>
+      <stop offset="45%" stop-color="#38BDF8"/>
+      <stop offset="78%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+    <linearGradient id="agInner" x1="20" y1="48" x2="44" y2="24" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#agBg)"/>
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="13.25" stroke="#334155" stroke-opacity="0.6" stroke-width="1.5"/>
+  <!-- Stylized Antigravity Floating Delta / A Prism -->
+  <path d="M32 13L50 47.5C51.2 49.8 49.5 52 47 51.2L35.2 47.2C33.1 46.5 30.9 46.5 28.8 47.2L17 51.2C14.5 52 12.8 49.8 14 47.5L32 13Z" fill="url(#agGrad)"/>
+  <path d="M32 23.5L40.5 41.2C37.8 40.2 34.9 39.7 32 39.7C29.1 39.7 26.2 40.2 23.5 41.2L32 23.5Z" fill="#0F172A"/>
+  <circle cx="32" cy="35" r="3.2" fill="url(#agInner)"/>
+</svg>

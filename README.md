@@ -1,24 +1,36 @@
 <div align="center">
-  <img src="./assets/hero-banner.svg" alt="Fathur Hariyadi — Architectural Developer Profile" width="100%" />
+  <img src="./assets/hero-banner.svg" alt="Fathurrahman Hariyadi — Cosmic Sapphire Developer Profile" width="100%" />
 </div>
 
 <table>
   <tr>
-    <td width="25%" align="center">
-      <strong><a href="https://portofthrxyz.vercel.app">PORTFOLIO &nearr;</a></strong><br />
+    <td width="25%" align="center" valign="middle">
+      <a href="https://portofthrxyz.vercel.app">
+        <img src="./assets/icon-portfolio.svg" alt="Portfolio" width="46" height="46" /><br />
+        <strong>PORTFOLIO &nearr;</strong>
+      </a><br />
       <sub><code>portofthrxyz.vercel.app</code></sub>
     </td>
-    <td width="25%" align="center">
-      <strong><a href="https://github.com/fhariyadi-dev/askyuna-starter-kit">AI AGENT &nearr;</a></strong><br />
+    <td width="25%" align="center" valign="middle">
+      <a href="https://github.com/fhariyadi-dev/askyuna-starter-kit">
+        <img src="./assets/yuna-ai-logo.jpg" alt="Yuna AI Agent" width="46" height="46" /><br />
+        <strong>AI AGENT &nearr;</strong>
+      </a><br />
       <sub><code>@askyuna.ai</code></sub>
     </td>
-    <td width="25%" align="center">
-      <strong><a href="https://instagram.com/fthr.xjz">INSTAGRAM &nearr;</a></strong><br />
+    <td width="25%" align="center" valign="middle">
+      <a href="https://instagram.com/fthr.xjz">
+        <img src="./assets/icon-instagram.svg" alt="Instagram" width="46" height="46" /><br />
+        <strong>INSTAGRAM &nearr;</strong>
+      </a><br />
       <sub><code>@fthr.xjz</code></sub>
     </td>
-    <td width="25%" align="center">
-      <strong><a href="mailto:ganzfathur9@gmail.com">EMAIL &nearr;</a></strong><br />
-      <sub><code>ganzfathur9@gmail.com</code></sub>
+    <td width="25%" align="center" valign="middle">
+      <a href="mailto:hallo@fathurrahmanh.me">
+        <img src="./assets/icon-email.svg" alt="Email" width="46" height="46" /><br />
+        <strong>EMAIL &nearr;</strong>
+      </a><br />
+      <sub><code>hallo@fathurrahmanh.me</code></sub>
     </td>
   </tr>
 </table>
@@ -36,18 +48,19 @@
 ```yaml
 # ~/.config/fathur.yml
 identity:
-  name: "Fathur Hariyadi"
+  name: "Fathurrahman Hariyadi"
   alias: ["fthrxyzz", "fhariyadi-dev"]
   pronouns: "he/him"
   location: "Lampung, Indonesia 🇮🇩"
+  email: "hallo@fathurrahmanh.me"
 
-education:
-  current: "B.Sc. Computer Science — Universitas Lampung"
-  previous: "Informatics Engineering — UAD"
+profile:
+  role: "Web & Software Developer"
+  ai_partner: "Yuna AI (@askyuna.ai)"
 
 interests:
   - "Modern Web & Frontend Engineering"
-  - "AI Agent Systems (@askyuna.ai)"
+  - "AI Agent Workflows & Automation"
   - "Clean UI/UX & Interactive Design"
   - "Algorithms & Systems (C++ / Low-Level)"
 ```
@@ -58,8 +71,8 @@ interests:
 ### Current Mission
 
 - **Building** responsive web apps with **React 19**, **TypeScript**, **Vite**, and **Tailwind CSS v4**.
-- **Experimenting** with personal AI coding workflows & starter kits via [`askyuna-starter-kit`](https://github.com/fhariyadi-dev/askyuna-starter-kit).
-- **Sharpening** computer science fundamentals across data structures, algorithms, and systems programming in **C++**.
+- **Developing** personal AI coding workflows & starter kits via [`askyuna-starter-kit`](https://github.com/fhariyadi-dev/askyuna-starter-kit).
+- **Sharpening** software engineering fundamentals across algorithms, data structures, and systems programming in **C++**.
 - **Open to** web development collaborations, open-source projects, and software engineering opportunities.
 
 > *"Code cleanly, ship iteratively, and turn complex ideas into interfaces people enjoy using."*
@@ -74,24 +87,29 @@ interests:
 
 ## `02` // Tech Deck
 
-<table>
-  <tr>
-    <td width="50%" align="center" valign="top">
-      <h4>Core Languages</h4>
-      <p><sub>Languages actively used across my GitHub repositories</sub></p>
-      <img src="https://skillicons.dev/icons?i=ts,js,cpp,html,css&theme=dark" alt="TypeScript, JavaScript, C++, HTML5, CSS3" />
-      <br /><br />
-      <img src="https://img.shields.io/badge/x86_Assembly-emu8086-0B1120?style=flat-square&logo=intel&logoColor=38BDF8&labelColor=111C33" alt="x86 Assembly (emu8086)" />
-      <p><sub><code>TypeScript</code> · <code>JavaScript</code> · <code>C++</code> · <code>HTML5</code> · <code>CSS3</code> · <code>Assembly</code></sub></p>
-    </td>
-    <td width="50%" align="center" valign="top">
-      <h4>Frameworks &amp; Dev Tools</h4>
-      <p><sub>Frontend stack, build tooling &amp; deployment workflow</sub></p>
-      <img src="https://skillicons.dev/icons?i=react,vite,tailwind,vercel,git,github,vscode&perline=4&theme=dark" alt="React, Vite, Tailwind CSS, Vercel, Git, GitHub, VS Code" />
-      <p><sub><code>React</code> · <code>Vite</code> · <code>Tailwind CSS</code> · <code>Vercel</code> · <code>Git</code> · <code>GitHub</code> · <code>VS Code</code></sub></p>
-    </td>
-  </tr>
-</table>
+<div align="center">
+
+#### Dev Environment, Frameworks &amp; Tools
+
+<p>
+  <img src="./assets/icon-antigravity.svg" alt="Antigravity" height="62" />
+  &nbsp;
+  <img src="https://skillicons.dev/icons?i=vscode,react,vite,tailwind,vercel,git,github&theme=dark" alt="VS Code, React, Vite, Tailwind CSS, Vercel, Git, GitHub" height="62" />
+</p>
+<p><sub><code>Antigravity</code> · <code>VS Code</code> · <code>React</code> · <code>Vite</code> · <code>Tailwind CSS</code> · <code>Vercel</code> · <code>Git</code> · <code>GitHub</code></sub></p>
+
+<br />
+
+#### Core Languages
+
+<p>
+  <img src="https://skillicons.dev/icons?i=ts,js,cpp,html,css&theme=dark" alt="TypeScript, JavaScript, C++, HTML5, CSS3" height="62" />
+  &nbsp;
+  <img src="./assets/icon-asm.svg" alt="x86 Assembly (emu8086)" height="62" />
+</p>
+<p><sub><code>TypeScript</code> · <code>JavaScript</code> · <code>C++</code> · <code>HTML5</code> · <code>CSS3</code> · <code>x86 Assembly (emu8086)</code></sub></p>
+
+</div>
 
 <div align="center">
   <img src="./assets/divider.svg" alt="divider" width="100%" />
@@ -111,7 +129,7 @@ interests:
     </td>
     <td width="50%" valign="top">
       <h3><a href="https://github.com/fhariyadi-dev/askyuna-starter-kit">askyuna-starter-kit</a></h3>
-      <p>Starter kit and practical playbook for building and customizing personal AI coding agent workflows — Yuna by Fathur.</p>
+      <p>Starter kit and practical playbook for building and customizing personal AI coding agent workflows — Yuna AI by Fathurrahman.</p>
       <p>
         <code>AI Agent</code> <code>Workflows</code> <code>Prompt Design</code>
       </p>
@@ -129,9 +147,9 @@ interests:
     </td>
     <td width="50%" valign="top">
       <h3><a href="https://github.com/fhariyadi-dev/Sistem-Pembagian-Tagihan-Pengeluaran-Kost">Sistem Pembagian Tagihan Kost</a></h3>
-      <p>Dormitory shared-expense and bill-splitting application developed as Computer Science Semester 1 Final Project at UNILA.</p>
+      <p>Dormitory shared-expense and bill-splitting CLI application engineered for fair and fast monthly expense calculations.</p>
       <p>
-        <code>C++</code> <code>CLI System</code> <code>UNILA</code>
+        <code>C++</code> <code>CLI System</code> <code>Algorithms</code>
       </p>
       <a href="https://github.com/fhariyadi-dev/Sistem-Pembagian-Tagihan-Pengeluaran-Kost" target="_blank">View Source &rarr;</a>
     </td>
@@ -170,13 +188,13 @@ interests:
 <br />
 
 <div align="center">
-  <img src="https://streak-stats.demolab.com?user=fhariyadi-dev&theme=transparent&hide_border=true&ring=10B981&fire=06B6D4&currStreakLabel=34D399&sideLabels=CBD5E1&dates=64748B&currStreakNum=F8FAFC&sideNums=F8FAFC&stroke=1E293B" alt="GitHub Streak Stats" />
+  <img src="https://streak-stats.demolab.com?user=fhariyadi-dev&theme=transparent&hide_border=true&ring=00E5FF&fire=3B82F6&currStreakLabel=38BDF8&sideLabels=CBD5E1&dates=64748B&currStreakNum=F8FAFC&sideNums=F8FAFC&stroke=1E3A5F" alt="GitHub Streak Stats" />
 </div>
 
 <br />
 
 <div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=fhariyadi-dev&bg_color=0B1120&color=34D399&line=06B6D4&point=F8FAFC&area=true&area_color=10B981&hide_border=true" alt="Contribution Activity Graph" width="100%" />
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=fhariyadi-dev&bg_color=050915&color=7DD3FC&line=00E5FF&point=F8FAFC&area=true&area_color=2563EB&hide_border=true" alt="Contribution Activity Graph" width="100%" />
 </div>
 
 <br />
