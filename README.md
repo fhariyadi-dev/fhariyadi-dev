@@ -1,23 +1,27 @@
 <div align="center">
-  <img src="./assets/hero-banner.svg" alt="Fathur Hariyadi — Developer Profile Banner" width="100%" />
+  <img src="./assets/hero-banner.svg" alt="Fathur Hariyadi — Architectural Developer Profile" width="100%" />
 </div>
 
-<br />
-
-<div align="center">
-  <a href="https://portofthrxyz.vercel.app" target="_blank">
-    <img src="https://img.shields.io/badge/Portfolio-portofthrxyz.vercel.app-0B1120?style=for-the-badge&logo=vercel&logoColor=10B981&labelColor=111827" alt="Portfolio" />
-  </a>
-  <a href="mailto:ganzfathur9@gmail.com">
-    <img src="https://img.shields.io/badge/Email-ganzfathur9%40gmail.com-0B1120?style=for-the-badge&logo=gmail&logoColor=38BDF8&labelColor=111827" alt="Email" />
-  </a>
-  <a href="https://instagram.com/fthr.xjz" target="_blank">
-    <img src="https://img.shields.io/badge/Instagram-%40fthr.xjz-0B1120?style=for-the-badge&logo=instagram&logoColor=F472B6&labelColor=111827" alt="Instagram" />
-  </a>
-  <img src="https://komarev.com/ghpvc/?username=fhariyadi-dev&label=VIEWS&color=10B981&style=for-the-badge" alt="Profile Views" />
-</div>
-
-<br />
+<table>
+  <tr>
+    <td width="25%" align="center">
+      <strong><a href="https://portofthrxyz.vercel.app">PORTFOLIO &nearr;</a></strong><br />
+      <sub><code>portofthrxyz.vercel.app</code></sub>
+    </td>
+    <td width="25%" align="center">
+      <strong><a href="https://github.com/fhariyadi-dev/askyuna-starter-kit">AI AGENT &nearr;</a></strong><br />
+      <sub><code>@askyuna.ai</code></sub>
+    </td>
+    <td width="25%" align="center">
+      <strong><a href="https://instagram.com/fthr.xjz">INSTAGRAM &nearr;</a></strong><br />
+      <sub><code>@fthr.xjz</code></sub>
+    </td>
+    <td width="25%" align="center">
+      <strong><a href="mailto:ganzfathur9@gmail.com">EMAIL &nearr;</a></strong><br />
+      <sub><code>ganzfathur9@gmail.com</code></sub>
+    </td>
+  </tr>
+</table>
 
 <div align="center">
   <img src="./assets/divider.svg" alt="divider" width="100%" />

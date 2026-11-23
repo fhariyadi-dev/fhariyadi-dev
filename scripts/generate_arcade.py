@@ -2,14 +2,19 @@
 """
 Generates an original, copyright-free animated SVG display:
 "YUNA-BOT // COMMIT DEFENDER" — combining a floating cyber-robot mascot
-with a GitHub contribution-grid arcade mini-game.
+with the user's REAL 53-week x 7-day GitHub contribution calendar.
 
-When run inside GitHub Actions with GITHUB_TOKEN, it fetches the user's real
-contribution heatmap via GraphQL. Offline, it renders a clean emerald matrix.
+Data source priority:
+1. --html <path> (local saved https://github.com/users/<user>/contributions HTML)
+2. Live public fetch from https://github.com/users/<user>/contributions (no token required!)
+3. GitHub GraphQL API if GITHUB_TOKEN is provided
 """
 
+import argparse
+import datetime as dt
 import json
 import os
+import re
 import urllib.request
 from pathlib import Path
 
@@ -17,27 +22,35 @@ USERNAME = os.environ.get("GITHUB_USERNAME", "fhariyadi-dev")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 
 LEVEL_COLORS = {
-    0: "#151D2B",
+    0: "#161B22",
     1: "#0E4429",
     2: "#006D32",
     3: "#26A641",
     4: "#39D353",
 }
 
-# Fallback contribution heatmap (28 weeks x 6 rows) inspired by active sprint cadence
-FALLBACK_GRID = [
-    [0, 1, 0, 0, 1, 0, 2, 1, 0, 1, 2, 0, 1, 3, 2, 1, 0, 2, 1, 0, 0, 1, 2, 1, 0, 2, 3, 4],
-    [1, 0, 0, 1, 2, 0, 1, 0, 1, 2, 3, 1, 0, 2, 1, 0, 1, 3, 2, 1, 0, 1, 0, 2, 1, 3, 4, 3],
-    [0, 0, 1, 2, 1, 0, 0, 1, 2, 1, 0, 2, 1, 4, 3, 2, 1, 0, 2, 1, 1, 0, 2, 3, 2, 1, 3, 4],
-    [0, 1, 0, 1, 0, 1, 2, 0, 1, 3, 2, 1, 0, 2, 4, 1, 0, 1, 3, 2, 0, 1, 1, 2, 3, 2, 4, 3],
-    [1, 0, 1, 0, 2, 1, 0, 1, 0, 2, 1, 0, 2, 1, 2, 3, 1, 2, 0, 1, 2, 1, 0, 2, 4, 3, 2, 4],
-    [0, 0, 0, 1, 1, 0, 1, 0, 2, 1, 0, 1, 1, 0, 2, 1, 2, 1, 1, 0, 1, 2, 1, 0, 2, 3, 4, 3],
-]
+
+def parse_contributions_html(html: str) -> list[tuple[str, int]]:
+    matches = re.findall(r'data-date="(\d{4}-\d{2}-\d{2})"[^>]*data-level="(\d)"', html)
+    if not matches:
+        rev = re.findall(r'data-level="(\d)"[^>]*data-date="(\d{4}-\d{2}-\d{2})"', html)
+        matches = [(d, l) for l, d in rev]
+    dedup = {d: int(l) for d, l in matches}
+    return sorted(dedup.items())
 
 
-def fetch_github_contributions() -> list[list[int]] | None:
-    if not GITHUB_TOKEN:
-        return None
+def fetch_public_contributions(username: str) -> list[tuple[str, int]]:
+    url = f"https://github.com/users/{username}/contributions"
+    req = urllib.request.Request(url, headers={"User-Agent": "yuna-arcade-generator/2.0"})
+    with urllib.request.urlopen(req, timeout=20) as resp:
+        html = resp.read().decode("utf-8")
+    days = parse_contributions_html(html)
+    if not days:
+        raise RuntimeError("No contribution cells found in public HTML")
+    return days
+
+
+def fetch_graphql_contributions(username: str, token: str) -> list[tuple[str, int]]:
     query = """
     query($login: String!) {
       user(login: $login) {
@@ -45,6 +58,7 @@ def fetch_github_contributions() -> list[list[int]] | None:
           contributionCalendar {
             weeks {
               contributionDays {
+                date
                 contributionCount
               }
             }
@@ -53,78 +67,156 @@ def fetch_github_contributions() -> list[list[int]] | None:
       }
     }
     """
-    payload = json.dumps({"query": query, "variables": {"login": USERNAME}}).encode("utf-8")
+    payload = json.dumps({"query": query, "variables": {"login": username}}).encode("utf-8")
     req = urllib.request.Request(
         "https://api.github.com/graphql",
         data=payload,
         headers={
-            "Authorization": f"Bearer {GITHUB_TOKEN}",
+            "Authorization": f"Bearer {token}",
             "Content-Type": "application/json",
-            "User-Agent": "yuna-arcade-generator",
+            "User-Agent": "yuna-arcade-generator/2.0",
         },
     )
-    try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-        weeks = data["data"]["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
-        recent = weeks[-28:]
-        rows = [[0] * len(recent) for _ in range(6)]
-        for col, week in enumerate(recent):
-            days = week["contributionDays"][:6]
-            for row, day in enumerate(days):
-                c = day["contributionCount"]
-                level = 0 if c == 0 else (1 if c <= 1 else (2 if c <= 3 else (3 if c <= 6 else 4)))
-                rows[row][col] = level
-        return rows
-    except Exception:
-        return None
+    with urllib.request.urlopen(req, timeout=20) as resp:
+        data = json.loads(resp.read().decode("utf-8"))
+    weeks = data["data"]["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
+    days: list[tuple[str, int]] = []
+    for week in weeks:
+        for day in week["contributionDays"]:
+            c = day["contributionCount"]
+            lvl = 0 if c == 0 else (1 if c <= 1 else (2 if c <= 3 else (3 if c <= 6 else 4)))
+            days.append((day["date"], lvl))
+    days.sort()
+    return days
 
 
-def build_svg(grid: list[list[int]]) -> str:
-    cols = len(grid[0])
-    rows = len(grid)
-    tile = 14
-    gap = 5
-    start_x = 294
-    start_y = 88
+def arrange_calendar_columns(days: list[tuple[str, int]]) -> tuple[list[list[int | None]], list[tuple[int, str]], int]:
+    """
+    Arrange real (YYYY-MM-DD, level) entries into GitHub's exact 7-row (Sun=0..Sat=6)
+    weekly columns so every single green square matches GitHub's profile graph 1-to-1.
+    """
+    parsed = [(dt.date.fromisoformat(d), lvl) for d, lvl in days]
+    first_date = parsed[0][0]
+    # GitHub calendar starts each column on Sunday (Python weekday(): Mon=0..Sun=6 -> Sun=0..Sat=6)
+    first_sun = first_date - dt.timedelta(days=(first_date.weekday() + 1) % 7)
+    last_date = parsed[-1][0]
+    num_weeks = ((last_date - first_sun).days // 7) + 1
 
-    # Pixel bug positions inside grid (row, col)
-    bug_cells = [(1, 6), (0, 14), (1, 22)]
+    # Keep at most 53 most recent weeks
+    if num_weeks > 53:
+        shift = num_weeks - 53
+        first_sun += dt.timedelta(days=shift * 7)
+        num_weeks = 53
 
+    # columns[col][row] where row 0=Sun..6=Sat
+    columns: list[list[int | None]] = [[None] * 7 for _ in range(num_weeks)]
+    active_days = 0
+    for date_obj, lvl in parsed:
+        delta = (date_obj - first_sun).days
+        if delta < 0:
+            continue
+        col = delta // 7
+        row = delta % 7
+        if col < num_weeks:
+            columns[col][row] = lvl
+            if lvl > 0:
+                active_days += 1
+
+    # Month labels at the first week where a month starts
+    month_labels: list[tuple[int, str]] = []
+    seen_ym: set[tuple[int, int]] = set()
+    for col in range(num_weeks):
+        week_date = first_sun + dt.timedelta(days=col * 7)
+        ym = (week_date.year, week_date.month)
+        if ym not in seen_ym:
+            seen_ym.add(ym)
+            # Avoid crowding if too close to previous label
+            if not month_labels or col - month_labels[-1][0] >= 3:
+                month_labels.append((col, week_date.strftime("%b")))
+
+    return columns, month_labels, active_days
+
+
+def pick_empty_bug_cells(columns: list[list[int | None]]) -> list[tuple[int, int]]:
+    """
+    Choose 3 empty (level 0) cells in the top rows across the left/middle/right
+    third of the calendar so pixel bugs NEVER obscure a real green contribution tile.
+    """
+    num_weeks = len(columns)
+    targets = [int(num_weeks * 0.22), int(num_weeks * 0.50), int(num_weeks * 0.78)]
+    chosen: list[tuple[int, int]] = []
+    for target_col in targets:
+        found = None
+        for offset in range(0, 8):
+            for c in (target_col + offset, target_col - offset):
+                if 1 <= c < num_weeks - 1:
+                    for r in (1, 0, 2):
+                        if columns[c][r] == 0:
+                            found = (r, c)
+                            break
+                if found:
+                    break
+            if found:
+                break
+        if found:
+            chosen.append(found)
+    return chosen
+
+
+def build_svg(columns: list[list[int | None]], month_labels: list[tuple[int, str]], active_days: int) -> str:
+    num_weeks = len(columns)
+    tile = 9
+    gap = 2
+    step = tile + gap
+    grid_w = num_weeks * step - gap
+    start_x = int(252 + (626 - grid_w) / 2)
+    start_y = 98
+
+    bug_cells = pick_empty_bug_cells(columns)
+    bug_set = set(bug_cells)
+
+    # Month header labels
+    months_svg = []
+    for col, label in month_labels:
+        mx = start_x + col * step
+        months_svg.append(
+            f'    <text x="{mx}" y="90" class="mono" font-size="8.5" fill="#64748B">{label}</text>'
+        )
+
+    # Exact real GitHub contribution tiles (53 weeks x 7 days)
     tiles_svg = []
-    for r in range(rows):
-        for c in range(cols):
-            x = start_x + c * (tile + gap)
-            y = start_y + r * (tile + gap)
-            if (r, c) in bug_cells:
-                # Render subtle dark backing cell behind animated bug sprite
+    for c in range(num_weeks):
+        for r in range(7):
+            lvl = columns[c][r]
+            if lvl is None:
+                continue
+            x = start_x + c * step
+            y = start_y + r * step
+            if (r, c) in bug_set:
                 tiles_svg.append(
-                    f'    <rect x="{x}" y="{y}" width="{tile}" height="{tile}" rx="3" fill="#151D2B" stroke="#F59E0B" stroke-opacity="0.35" stroke-width="0.8"/>'
+                    f'    <rect x="{x}" y="{y}" width="{tile}" height="{tile}" rx="2" fill="#161B22" stroke="#F59E0B" stroke-opacity="0.45" stroke-width="0.7"/>'
                 )
             else:
-                lvl = grid[r][c]
-                fill = LEVEL_COLORS.get(lvl, "#151D2B")
-                extra = ' opacity="0.95"' if lvl >= 3 else ""
+                fill = LEVEL_COLORS.get(lvl, "#161B22")
                 tiles_svg.append(
-                    f'    <rect x="{x}" y="{y}" width="{tile}" height="{tile}" rx="3" fill="{fill}"{extra}/>'
+                    f'    <rect x="{x}" y="{y}" width="{tile}" height="{tile}" rx="2" fill="{fill}"/>'
                 )
 
-    # Original geometric "pixel bug" sprites (3 targets hovering above/in grid)
+    # Compact pixel-bug sprites strictly on empty cells
     bugs_svg = []
     for idx, (r, c) in enumerate(bug_cells):
-        cx = start_x + c * (tile + gap) + tile / 2
-        cy = start_y + r * (tile + gap) + tile / 2
+        cx = start_x + c * step + tile / 2
+        cy = start_y + r * step + tile / 2
         delay = idx * 0.65
         bugs_svg.append(f"""    <g class="bug-target" style="animation-delay: {delay:.2f}s;">
-      <rect x="{cx - 6:.1f}" y="{cy - 4:.1f}" width="12" height="8" rx="2.5" fill="#F59E0B"/>
-      <rect x="{cx - 4:.1f}" y="{cy - 2:.1f}" width="2.5" height="2.5" rx="0.6" fill="#090D16"/>
-      <rect x="{cx + 1.5:.1f}" y="{cy - 2:.1f}" width="2.5" height="2.5" rx="0.6" fill="#090D16"/>
-      <line x1="{cx - 4:.1f}" y1="{cy - 4:.1f}" x2="{cx - 6:.1f}" y2="{cy - 7:.1f}" stroke="#FBBF24" stroke-width="1.3" stroke-linecap="round"/>
-      <line x1="{cx + 4:.1f}" y1="{cy - 4:.1f}" x2="{cx + 6:.1f}" y2="{cy - 7:.1f}" stroke="#FBBF24" stroke-width="1.3" stroke-linecap="round"/>
-      <line x1="{cx - 6:.1f}" y1="{cy + 2:.1f}" x2="{cx - 8.5:.1f}" y2="{cy + 4.5:.1f}" stroke="#F59E0B" stroke-width="1.2" stroke-linecap="round"/>
-      <line x1="{cx + 6:.1f}" y1="{cy + 2:.1f}" x2="{cx + 8.5:.1f}" y2="{cy + 4.5:.1f}" stroke="#F59E0B" stroke-width="1.2" stroke-linecap="round"/>
+      <rect x="{cx - 4.5:.1f}" y="{cy - 3:.1f}" width="9" height="6" rx="1.8" fill="#F59E0B"/>
+      <rect x="{cx - 3:.1f}" y="{cy - 1.5:.1f}" width="1.8" height="1.8" rx="0.4" fill="#090D16"/>
+      <rect x="{cx + 1.2:.1f}" y="{cy - 1.5:.1f}" width="1.8" height="1.8" rx="0.4" fill="#090D16"/>
+      <line x1="{cx - 3:.1f}" y1="{cy - 3:.1f}" x2="{cx - 4.5:.1f}" y2="{cy - 5:.1f}" stroke="#FBBF24" stroke-width="1" stroke-linecap="round"/>
+      <line x1="{cx + 3:.1f}" y1="{cy - 3:.1f}" x2="{cx + 4.5:.1f}" y2="{cy - 5:.1f}" stroke="#FBBF24" stroke-width="1" stroke-linecap="round"/>
     </g>""")
 
+    months_str = "\n".join(months_svg)
     tiles_str = "\n".join(tiles_svg)
     bugs_str = "\n".join(bugs_svg)
 
@@ -136,7 +228,7 @@ def build_svg(grid: list[list[int]]) -> str:
       <stop offset="100%" stop-color="#091520"/>
     </linearGradient>
 
-    <radialGradient id="podGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(129 216) scale(76 22)">
+    <radialGradient id="podGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(129 212) scale(76 22)">
       <stop offset="0%" stop-color="#10B981" stop-opacity="0.45"/>
       <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
     </radialGradient>
@@ -147,9 +239,9 @@ def build_svg(grid: list[list[int]]) -> str:
     </radialGradient>
 
     <linearGradient id="neonAccent" x1="0" y1="0" x2="900" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#10B981"/>
-      <stop offset="50%" stop-color="#06B6D4"/>
-      <stop offset="100%" stop-color="#6366F1"/>
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="45%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
     </linearGradient>
 
     <linearGradient id="laserGrad" x1="0" y1="0" x2="0" y2="1">
@@ -159,7 +251,7 @@ def build_svg(grid: list[list[int]]) -> str:
     </linearGradient>
 
     <pattern id="arcadeGrid" width="24" height="24" patternUnits="userSpaceOnUse">
-      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1E293B" stroke-width="0.6" opacity="0.45"/>
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1E293B" stroke-width="0.6" opacity="0.4"/>
     </pattern>
 
     <clipPath id="outerClip">
@@ -197,20 +289,20 @@ def build_svg(grid: list[list[int]]) -> str:
     }}
     @keyframes dronePatrol {{
       0% {{ transform: translateX(0px); }}
-      22% {{ transform: translateX(132px); }}
-      48% {{ transform: translateX(282px); }}
-      74% {{ transform: translateX(416px); }}
+      24% {{ transform: translateX(155px); }}
+      52% {{ transform: translateX(315px); }}
+      78% {{ transform: translateX(480px); }}
       100% {{ transform: translateX(0px); }}
     }}
     @keyframes laserPulse {{
       0% {{ transform: translateY(0px); opacity: 0; }}
       15% {{ opacity: 1; }}
-      75% {{ transform: translateY(-102px); opacity: 0.95; }}
-      100% {{ transform: translateY(-120px); opacity: 0; }}
+      75% {{ transform: translateY(-88px); opacity: 0.95; }}
+      100% {{ transform: translateY(-102px); opacity: 0; }}
     }}
     @keyframes bugHover {{
       0%, 100% {{ transform: translateY(0px); }}
-      50% {{ transform: translateY(-2.5px); }}
+      50% {{ transform: translateY(-2px); }}
     }}
     @keyframes ledBlink {{
       0%, 100% {{ opacity: 1; }}
@@ -223,7 +315,7 @@ def build_svg(grid: list[list[int]]) -> str:
     .eq1 {{ animation: eqBar1 1.1s ease-in-out infinite; }}
     .eq2 {{ animation: eqBar2 0.85s ease-in-out infinite; }}
     .eq3 {{ animation: eqBar3 1.3s ease-in-out infinite; }}
-    .drone-group {{ animation: dronePatrol 9s ease-in-out infinite; }}
+    .drone-group {{ animation: dronePatrol 10s ease-in-out infinite; }}
     .laser-beam {{ animation: laserPulse 1.5s linear infinite; }}
     .bug-target {{ animation: bugHover 2s ease-in-out infinite; }}
     .led-blink {{ animation: ledBlink 1.8s ease-in-out infinite; }}
@@ -240,11 +332,11 @@ def build_svg(grid: list[list[int]]) -> str:
     <circle cx="22" cy="18" r="4.5" fill="#10B981" class="led-blink"/>
     <text x="36" y="22" class="mono" font-size="11.5" font-weight="700" fill="#E2E8F0" letter-spacing="0.6">ARCADE.SYS // YUNA-BOT COMMIT DEFENDER</text>
 
-    <rect x="646" y="8" width="112" height="20" rx="6" fill="#111C33" stroke="#1E293B" stroke-width="1"/>
-    <text x="702" y="21.5" text-anchor="middle" class="mono" font-size="10" fill="#38BDF8">PLAYER: FTHRXYZZ</text>
+    <rect x="614" y="8" width="144" height="20" rx="6" fill="#111C33" stroke="#1E293B" stroke-width="1"/>
+    <text x="686" y="21.5" text-anchor="middle" class="mono" font-size="10" fill="#38BDF8">LIVE SYNC · {active_days} ACTIVE DAYS</text>
 
     <rect x="766" y="8" width="114" height="20" rx="6" fill="#10B981" fill-opacity="0.12" stroke="#10B981" stroke-opacity="0.4" stroke-width="1"/>
-    <text x="823" y="21.5" text-anchor="middle" class="mono" font-size="10" font-weight="700" fill="#6EE7B7">MODE: AUTO-PLAY</text>
+    <text x="823" y="21.5" text-anchor="middle" class="mono" font-size="10" font-weight="700" fill="#6EE7B7">53W REAL GRID</text>
 
     <!-- LEFT HOLO-POD: ORIGINAL YUNA-BOT MASCOT -->
     <rect x="22" y="50" width="214" height="200" rx="12" fill="#0B1120" fill-opacity="0.88" stroke="#1E293B" stroke-width="1.2"/>
@@ -259,46 +351,34 @@ def build_svg(grid: list[list[int]]) -> str:
     <ellipse cx="129" cy="212" rx="44" ry="6.5" fill="none" stroke="#10B981" stroke-opacity="0.55" stroke-width="1.2"/>
     <ellipse cx="129" cy="212" rx="24" ry="3.5" fill="#10B981" fill-opacity="0.22"/>
 
-    <!-- Floating Cyber-Robot Character (100% Original Vector Design) -->
+    <!-- Floating Cyber-Robot Character -->
     <g class="yuna-bot">
       <circle cx="129" cy="126" r="52" fill="url(#visorGlow)"/>
-
-      <!-- Antenna -->
       <line x1="129" y1="96" x2="129" y2="84" stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round"/>
       <circle cx="129" cy="82" r="4" fill="#10B981" class="core-glow"/>
       <circle cx="129" cy="82" r="7" fill="none" stroke="#10B981" stroke-opacity="0.35" stroke-width="1"/>
 
-      <!-- Ear Pods -->
       <rect x="85" y="114" width="8" height="20" rx="4" fill="#1E293B" stroke="#38BDF8" stroke-width="1.2"/>
       <rect x="165" y="114" width="8" height="20" rx="4" fill="#1E293B" stroke="#38BDF8" stroke-width="1.2"/>
 
-      <!-- Head Shell -->
       <rect x="93" y="96" width="72" height="52" rx="18" fill="#111C33" stroke="#38BDF8" stroke-width="1.8"/>
-
-      <!-- Dark Visor -->
       <rect x="101" y="106" width="56" height="32" rx="11" fill="#060B14" stroke="#1E293B" stroke-width="1"/>
 
-      <!-- Expressive Cyber Eyes -->
       <g class="bot-eyes">
         <rect x="111" y="115" width="11" height="11" rx="3.5" fill="#10B981"/>
         <rect x="136" y="115" width="11" height="11" rx="3.5" fill="#10B981"/>
         <circle cx="114.5" cy="118.5" r="2" fill="#ECFDF5"/>
         <circle cx="139.5" cy="118.5" r="2" fill="#ECFDF5"/>
       </g>
-      <!-- Subtle Friendly Smile -->
       <path d="M 123 130 Q 129 134 135 130" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round" fill="none"/>
 
-      <!-- Floating Hover Arms -->
       <rect x="84" y="156" width="12" height="22" rx="6" fill="#0F172A" stroke="#10B981" stroke-width="1.4"/>
       <rect x="162" y="156" width="12" height="22" rx="6" fill="#0F172A" stroke="#10B981" stroke-width="1.4"/>
 
-      <!-- Cyber Torso -->
       <rect x="103" y="153" width="52" height="36" rx="12" fill="#111C33" stroke="#38BDF8" stroke-width="1.6"/>
-      <!-- Core Reactor -->
       <polygon points="129,161 137,171 129,181 121,171" fill="#10B981" fill-opacity="0.25" stroke="#34D399" stroke-width="1.5" class="core-glow"/>
       <circle cx="129" cy="171" r="2.8" fill="#67E8F9"/>
 
-      <!-- Thruster Flame -->
       <path d="M 121 191 L 129 202 L 137 191 Z" fill="#06B6D4" fill-opacity="0.7" class="core-glow"/>
     </g>
 
@@ -308,39 +388,48 @@ def build_svg(grid: list[list[int]]) -> str:
     <rect x="46" y="227" width="3.5" height="13" rx="1.5" fill="#818CF8" class="eq3"/>
     <text x="58" y="237" class="mono" font-size="10" fill="#94A3B8">AI CO-PILOT: ACTIVE</text>
 
-    <!-- RIGHT ARENA: CONTRIBUTION GRID MINI-GAME -->
+    <!-- RIGHT ARENA: REAL 53-WEEK GITHUB CONTRIBUTION MATRIX -->
     <rect x="252" y="50" width="626" height="200" rx="12" fill="#0B1120" fill-opacity="0.88" stroke="#1E293B" stroke-width="1.2"/>
     <rect x="252" y="50" width="626" height="24" rx="12" fill="#111C33"/>
     <rect x="252" y="64" width="626" height="10" fill="#111C33"/>
     <line x1="252" y1="74" x2="878" y2="74" stroke="#1E293B" stroke-width="1"/>
 
-    <text x="268" y="66" class="mono" font-size="10" font-weight="700" fill="#38BDF8">ARENA // CONTRIBUTION MATRIX</text>
-    <circle cx="678" cy="62" r="3.5" fill="#F59E0B"/>
-    <text x="687" y="66" class="mono" font-size="9.5" fill="#CBD5E1">BUGS</text>
-    <circle cx="738" cy="62" r="3.5" fill="#39D353"/>
-    <text x="747" y="66" class="mono" font-size="9.5" fill="#CBD5E1">COMMITS</text>
-    <circle cx="816" cy="62" r="3.5" fill="#38BDF8"/>
-    <text x="825" y="66" class="mono" font-size="9.5" fill="#CBD5E1">DRONE</text>
+    <text x="268" y="66" class="mono" font-size="10" font-weight="700" fill="#38BDF8">ARENA // REAL GITHUB CONTRIBUTIONS ({USERNAME})</text>
+    <circle cx="716" cy="62" r="3" fill="#F59E0B"/>
+    <text x="724" y="66" class="mono" font-size="9" fill="#CBD5E1">BUGS</text>
+    <circle cx="766" cy="62" r="3" fill="#39D353"/>
+    <text x="774" y="66" class="mono" font-size="9" fill="#CBD5E1">COMMITS</text>
+    <circle cx="830" cy="62" r="3" fill="#38BDF8"/>
+    <text x="838" y="66" class="mono" font-size="9" fill="#CBD5E1">DRONE</text>
 
-    <!-- Contribution Grid Tiles -->
+    <!-- Month Labels -->
+{months_str}
+
+    <!-- Real Contribution Grid Tiles (53 Weeks x 7 Days) -->
 {tiles_str}
 
-    <!-- Animated Pixel Bug Targets -->
+    <!-- Animated Pixel Bug Targets (strictly on empty cells) -->
 {bugs_str}
 
     <!-- Patrolling Mini Cyber-Drone + Laser Fire -->
     <g class="drone-group">
-      <!-- Vertical Laser Pulse -->
-      <rect x="331" y="198" width="3" height="18" rx="1.5" fill="url(#laserGrad)" class="laser-beam"/>
-
-      <!-- Mini Cyber-Ship / Drone -->
-      <polygon points="332.5,208 345,221 339,224 332.5,220 326,224 320,221" fill="#38BDF8"/>
-      <polygon points="332.5,211 337,219 328,219" fill="#ECFDF5"/>
-      <rect x="329.5" y="222" width="6" height="4" rx="2" fill="#10B981" class="core-glow"/>
+      <rect x="311" y="190" width="2.8" height="16" rx="1.4" fill="url(#laserGrad)" class="laser-beam"/>
+      <polygon points="312.4,200 324,212 318.5,215 312.4,211 306.3,215 300.8,212" fill="#38BDF8"/>
+      <polygon points="312.4,203 316.5,210 308.3,210" fill="#ECFDF5"/>
+      <rect x="309.5" y="213" width="5.8" height="3.5" rx="1.7" fill="#10B981" class="core-glow"/>
     </g>
 
+    <!-- Legend Bottom Right inside Arena -->
+    <text x="748" y="238" class="mono" font-size="8.5" fill="#64748B">Less</text>
+    <rect x="774" y="230" width="8" height="8" rx="1.8" fill="#161B22"/>
+    <rect x="785" y="230" width="8" height="8" rx="1.8" fill="#0E4429"/>
+    <rect x="796" y="230" width="8" height="8" rx="1.8" fill="#006D32"/>
+    <rect x="807" y="230" width="8" height="8" rx="1.8" fill="#26A641"/>
+    <rect x="818" y="230" width="8" height="8" rx="1.8" fill="#39D353"/>
+    <text x="831" y="238" class="mono" font-size="8.5" fill="#64748B">More</text>
+
     <!-- Bottom Status Ticker -->
-    <text x="26" y="271" class="mono" font-size="10.5" fill="#64748B">&gt; MISSION: ZAP BUGS · SHIP COMMITS · BUILD DAILY WITH @ASKYUNA.AI</text>
+    <text x="26" y="271" class="mono" font-size="10.5" fill="#64748B">&gt; SYNCED FROM GITHUB.COM/{USERNAME.upper()} · ZAP BUGS · SHIP COMMITS</text>
     <text x="876" y="271" text-anchor="end" class="mono" font-size="10.5" font-weight="700" fill="#34D399">SHIELD ██████ 100%</text>
 
     <!-- Bottom Neon Bar -->
@@ -353,12 +442,29 @@ def build_svg(grid: list[list[int]]) -> str:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--html", type=str, default="", help="Optional path to saved GitHub contributions HTML")
+    args = parser.parse_args()
+
+    days: list[tuple[str, int]]
+    if args.html:
+        days = parse_contributions_html(Path(args.html).read_text(encoding="utf-8"))
+    else:
+        try:
+            days = fetch_public_contributions(USERNAME)
+        except Exception:
+            if GITHUB_TOKEN:
+                days = fetch_graphql_contributions(USERNAME, GITHUB_TOKEN)
+            else:
+                raise
+
+    columns, month_labels, active_days = arrange_calendar_columns(days)
+    svg = build_svg(columns, month_labels, active_days)
+
     repo_root = Path(__file__).resolve().parent.parent
     out_path = repo_root / "assets" / "yuna-arcade.svg"
-    grid = fetch_github_contributions() or FALLBACK_GRID
-    svg = build_svg(grid)
     out_path.write_text(svg, encoding="utf-8")
-    print(f"Generated {out_path} ({len(svg)} bytes)")
+    print(f"Generated {out_path} ({len(svg)} bytes, {len(columns)} weeks, {active_days} active days)")
 
 
 if __name__ == "__main__":
