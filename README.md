@@ -68,38 +68,23 @@ interests:
   <img src="./assets/divider.svg" alt="divider" width="100%" />
 </div>
 
-## `02` // Tech Arsenal
+## `02` // Tech Deck
 
 <table>
   <tr>
-    <td width="22%"><strong>Languages</strong></td>
-    <td>
-      <img src="https://img.shields.io/badge/TypeScript-0D1117?style=for-the-badge&logo=typescript&logoColor=3178C6" alt="TypeScript" />
-      <img src="https://img.shields.io/badge/JavaScript-0D1117?style=for-the-badge&logo=javascript&logoColor=F7DF1E" alt="JavaScript" />
-      <img src="https://img.shields.io/badge/C%2B%2B-0D1117?style=for-the-badge&logo=cplusplus&logoColor=00599C" alt="C++" />
-      <img src="https://img.shields.io/badge/HTML5-0D1117?style=for-the-badge&logo=html5&logoColor=E34F26" alt="HTML5" />
-      <img src="https://img.shields.io/badge/CSS3-0D1117?style=for-the-badge&logo=css3&logoColor=1572B6" alt="CSS3" />
-      <img src="https://img.shields.io/badge/x86_Assembly-0D1117?style=for-the-badge&logo=intel&logoColor=38BDF8" alt="Assembly" />
+    <td width="50%" align="center" valign="top">
+      <h4>Core Languages</h4>
+      <p><sub>Languages actively used across my GitHub repositories</sub></p>
+      <img src="https://skillicons.dev/icons?i=ts,js,cpp,html,css&theme=dark" alt="TypeScript, JavaScript, C++, HTML5, CSS3" />
+      <br /><br />
+      <img src="https://img.shields.io/badge/x86_Assembly-emu8086-0B1120?style=flat-square&logo=intel&logoColor=38BDF8&labelColor=111C33" alt="x86 Assembly (emu8086)" />
+      <p><sub><code>TypeScript</code> · <code>JavaScript</code> · <code>C++</code> · <code>HTML5</code> · <code>CSS3</code> · <code>Assembly</code></sub></p>
     </td>
-  </tr>
-  <tr>
-    <td><strong>Frontend &amp; UI</strong></td>
-    <td>
-      <img src="https://img.shields.io/badge/React-0D1117?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
-      <img src="https://img.shields.io/badge/Vite-0D1117?style=for-the-badge&logo=vite&logoColor=A78BFA" alt="Vite" />
-      <img src="https://img.shields.io/badge/Tailwind_CSS-0D1117?style=for-the-badge&logo=tailwindcss&logoColor=06B6D4" alt="Tailwind CSS" />
-      <img src="https://img.shields.io/badge/Framer_Motion-0D1117?style=for-the-badge&logo=framer&logoColor=F472B6" alt="Framer Motion" />
-      <img src="https://img.shields.io/badge/Node.js-0D1117?style=for-the-badge&logo=nodedotjs&logoColor=339933" alt="Node.js" />
-    </td>
-  </tr>
-  <tr>
-    <td><strong>Tools &amp; Cloud</strong></td>
-    <td>
-      <img src="https://img.shields.io/badge/Git-0D1117?style=for-the-badge&logo=git&logoColor=F05032" alt="Git" />
-      <img src="https://img.shields.io/badge/GitHub-0D1117?style=for-the-badge&logo=github&logoColor=F8FAFC" alt="GitHub" />
-      <img src="https://img.shields.io/badge/Vercel-0D1117?style=for-the-badge&logo=vercel&logoColor=FFFFFF" alt="Vercel" />
-      <img src="https://img.shields.io/badge/VS_Code-0D1117?style=for-the-badge&logo=visualstudiocode&logoColor=007ACC" alt="VS Code" />
-      <img src="https://img.shields.io/badge/Linux-0D1117?style=for-the-badge&logo=linux&logoColor=FCC624" alt="Linux" />
+    <td width="50%" align="center" valign="top">
+      <h4>Frameworks &amp; Dev Tools</h4>
+      <p><sub>Frontend stack, build tooling &amp; deployment workflow</sub></p>
+      <img src="https://skillicons.dev/icons?i=react,vite,tailwind,vercel,git,github,vscode&perline=4&theme=dark" alt="React, Vite, Tailwind CSS, Vercel, Git, GitHub, VS Code" />
+      <p><sub><code>React</code> · <code>Vite</code> · <code>Tailwind CSS</code> · <code>Vercel</code> · <code>Git</code> · <code>GitHub</code> · <code>VS Code</code></sub></p>
     </td>
   </tr>
 </table>
@@ -188,6 +173,18 @@ interests:
 
 <div align="center">
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=fhariyadi-dev&bg_color=0B1120&color=34D399&line=06B6D4&point=F8FAFC&area=true&area_color=10B981&hide_border=true" alt="Contribution Activity Graph" width="100%" />
+</div>
+
+<br />
+
+<div align="center">
+  <img src="./assets/divider.svg" alt="divider" width="100%" />
+</div>
+
+## `05` // Arcade Console — YUNA-BOT Commit Defender
+
+<div align="center">
+  <img src="./assets/yuna-arcade.svg" alt="YUNA-BOT Commit Defender — Animated Robot & Contribution Arcade" width="100%" />
 </div>
 
 <br />
