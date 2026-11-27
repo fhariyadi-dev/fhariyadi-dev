@@ -111,7 +111,7 @@
     <text x="36" y="22" class="mono" font-size="11.5" font-weight="700" fill="#E2E8F0" letter-spacing="0.6">ARCADE.SYS // YUNA-BOT COMMIT DEFENDER</text>
 
     <rect x="614" y="8" width="144" height="20" rx="6" fill="#111C33" stroke="#1E293B" stroke-width="1"/>
-    <text x="686" y="21.5" text-anchor="middle" class="mono" font-size="10" fill="#38BDF8">LIVE SYNC · 34 ACTIVE DAYS</text>
+    <text x="686" y="21.5" text-anchor="middle" class="mono" font-size="10" fill="#38BDF8">LIVE SYNC · 35 ACTIVE DAYS</text>
 
     <rect x="766" y="8" width="114" height="20" rx="6" fill="#10B981" fill-opacity="0.12" stroke="#10B981" stroke-opacity="0.4" stroke-width="1"/>
     <text x="823" y="21.5" text-anchor="middle" class="mono" font-size="10" font-weight="700" fill="#6EE7B7">53W REAL GRID</text>
@@ -563,7 +563,8 @@
     <rect x="846" y="109" width="9" height="9" rx="2" fill="#39D353"/>
     <rect x="846" y="120" width="9" height="9" rx="2" fill="#0E4429"/>
     <rect x="846" y="131" width="9" height="9" rx="2" fill="#161B22"/>
-    <rect x="846" y="142" width="9" height="9" rx="2" fill="#161B22"/>
+    <rect x="846" y="142" width="9" height="9" rx="2" fill="#0E4429"/>
+    <rect x="846" y="153" width="9" height="9" rx="2" fill="#161B22"/>
 
     <!-- Animated Pixel Bug Targets (strictly on empty cells) -->
     <g class="bug-target" style="animation-delay: 0.00s;">
