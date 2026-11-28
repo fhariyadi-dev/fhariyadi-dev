@@ -565,6 +565,7 @@
     <rect x="846" y="131" width="9" height="9" rx="2" fill="#161B22"/>
     <rect x="846" y="142" width="9" height="9" rx="2" fill="#0E4429"/>
     <rect x="846" y="153" width="9" height="9" rx="2" fill="#161B22"/>
+    <rect x="846" y="164" width="9" height="9" rx="2" fill="#161B22"/>
 
     <!-- Animated Pixel Bug Targets (strictly on empty cells) -->
     <g class="bug-target" style="animation-delay: 0.00s;">
